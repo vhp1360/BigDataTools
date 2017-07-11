@@ -6,6 +6,8 @@
   - [Zookeeper](#zookeeper)
   - [Topic](#topic)
   - [Broker](#brker)
+  - [Produser](#produser)
+  - [Consumer](#consumer)
 - [](#)
 - [](#)
 - [](#)
@@ -35,12 +37,42 @@ then we can start kafka:
   bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 ```
 - Query of existing Topic:
+  1. One:
+  ```vim
+    bin/kafka-topics.sh --list --zookeeper localhost:2181
+  ```
+  2. Two:
+  ```vim
+    bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+  ```
+  
+## Broker
+in _config/server.properties_ file we find these configs:
 ```vim
-  bin/kafka-topics.sh --list --zookeeper localhost:2181
+  broker.id=0
+  listeners=PLAINTEXT://:9092
+  log.dir=/tmp/kafka-logs
+```
+to make next broker, we should increase id,port,logName incerementaly with brokerName.
+for example the server1.properties for broker1 will be:
+```vim
+  broker.id=1
+  listeners=PLAINTEXT://:9093
+  log.dir=/tmp/kafka-logs-1
 ```
 
-## Broker
+## Produser
+Produser coming for testing, it could send message to Consumer
+```vim
+  bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+  // after this command you could send message from terminal
+```
 
+## Consumer
+Consumer used to dump of inputing messaging.
+```vim
+  bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+```
 
 
 [Top](#top)
