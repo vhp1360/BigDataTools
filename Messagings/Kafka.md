@@ -2,13 +2,13 @@
 
 ###### top
 
-- [Configuration](#configuration)
+- [Single Configuration](#single-configuration)
   - [Zookeeper](#zookeeper)
   - [Topic](#topic)
   - [Broker](#brker)
   - [Produser](#produser)
   - [Consumer](#consumer)
-- [](#)
+- [Cluster Configuration](#)
 - [](#)
 - [](#)
 - [](#)
@@ -16,7 +16,8 @@
   
   
 [Top](#top)
-# Configuration
+
+# Single Configuration
 ## Zookeeper
 Kafka uses [ZooKeeper](https://zookeeper.apache.org/)
 ```vala
@@ -74,10 +75,15 @@ Consumer used to dump of inputing messaging.
   bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
+[Top](#top)
+# Cluster Configuration
+1. 
 
 [Top](#top)
 #
 
+[Top](#top)
+#
 
 [Top](#top)
 #
