@@ -20,7 +20,7 @@
 # Single Configuration
 ## Zookeeper
 Kafka uses [ZooKeeper](https://zookeeper.apache.org/)
-```vala
+```vim
   bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 then we can start kafka:
