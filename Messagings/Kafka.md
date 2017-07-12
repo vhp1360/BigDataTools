@@ -8,7 +8,7 @@
   - [Broker](#brker)
   - [Produser](#produser)
   - [Consumer](#consumer)
-- [Cluster Configuration](#cluster-cinfiguration)
+- [Cluster Configuration](#cluster-configuration)
 - [](#)
 - [](#)
 - [](#)
