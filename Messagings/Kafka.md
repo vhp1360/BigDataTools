@@ -101,6 +101,19 @@ Consumer used to dump of inputing messaging.
   log.dirs=/data/kafka/kafka-logs
   zookeeper.connect=Name1-Servers:2181,Name2-Servers:2181,Name3-Servers:2181,...
 ```
+  - Caution: if you have only one broker, all above config would be the same, **BUT** if we multi _Broker_ :
+    1. `cp  server.properties server[1].properties` and more as you need in all servers.
+    2. change below Items increamentaly in all servers:
+    ```vim
+      broker.id=[1]
+      port=909[3]
+      log.dir=/tmp/kafka-logs[1]
+    ```
+    3. start all:
+    ```vim
+      nohup bin/kafka-server-start.sh config/server[1].properties &
+    ```
+    4. finnaly start topic.
 6. Start Zookeeper on All Servers:
 ```vim
   nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
@@ -109,6 +122,22 @@ Consumer used to dump of inputing messaging.
 ```vim
   nohup bin/kafka-server-start.sh config/server.properties &
 ```
+8. Creat topic:
+```vim
+  $ bin/kafka-topics.sh --create --zookeeper Name1-Server:2181,... --replication-factor [LessThan N]\
+    --partition N --topic TopicName
+```
+9. Run Producer:
+```vim
+  bin/kafka-console-producer.sh --broker-list Name1-Server:9092,Name2-Server:9092,Name3-Server:9092,...\
+                                 --topic TopicName
+```
+10. Finally, Consumer:
+```vim
+  bin/kafka-console-consumer.sh --zookeeper Name1-Server:2181,Name2-Server:2181,Name3-Server:2181,...\
+                                --topic TopicName --from-beginning
+```
+
 
 [Top](#top)
 #
