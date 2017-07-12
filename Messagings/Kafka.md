@@ -8,7 +8,7 @@
   - [Broker](#brker)
   - [Produser](#produser)
   - [Consumer](#consumer)
-- [Cluster Configuration](#)
+- [Cluster Configuration](#cluster-cinfiguration)
 - [](#)
 - [](#)
 - [](#)
@@ -77,7 +77,38 @@ Consumer used to dump of inputing messaging.
 
 [Top](#top)
 # Cluster Configuration
-1. 
+1. First Install(untar) Kafka in the same path in all servers.
+2. assume ServerNames are like: NameiD-Server
+3. in Zookeeper config(zookeeper.properties) in all Servars:
+```vim
+  dataDir=/var/zookeeper/data  # Should define this path in all Server
+  clientPort=2181
+  maxClientCnxns=0
+  server.1=Name1-Server:2888:3888
+  server.2=Name2-Server:2888:3888
+  server.3=Name3-Server:2888:3888
+  ...
+  initLimit=5
+  syncLimit=2
+```
+4. Add ServerId in All Server under Zookeeper Path:
+```vim
+  echo "Id" > /var/zookeeper/data/serverid
+```
+5. Change server.config File for Kafka configuration in all server:
+```vim
+  broker.id=[BROKER_ID]
+  log.dirs=/data/kafka/kafka-logs
+  zookeeper.connect=Name1-Servers:2181,Name2-Servers:2181,Name3-Servers:2181,...
+```
+6. Start Zookeeper on All Servers:
+```vim
+  nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
+```
+7. also start Kafka on All machine:
+```vim
+  nohup bin/kafka-server-start.sh config/server.properties &
+```
 
 [Top](#top)
 #
