@@ -46,7 +46,22 @@ then we can start kafka:
   ```vim
     bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
   ```
-  
+- Delete Topic
+  1. Stop Kafka
+  2.
+  ```vim
+    bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic TopicName
+  ```
+  3. check _/Path/to/Log_ and _/tmp/kafka..._ folders to delete related files
+- Change Config and return to default:
+```vim
+  bin/kafka-configs.sh --zookeeper localhost:2181 --entity-type topics --alter --add-config \
+    retention.ms=1000 --entity-name TopicName
+  bin/kafka-configs.sh --zookeeper localhost:2181 --entity-type topics --alter --delete-config \
+    retention.ms --entity-name TopicName
+```
+
+
 ## Broker
 in _config/server.properties_ file we find these configs:
 ```vim
